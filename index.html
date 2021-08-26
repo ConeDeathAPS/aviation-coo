@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="style.css" rel="stylesheet">
+    <script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+<header>
+    <h1>Cost of Ownership</h1>
+</header>
+<main>
+    <article>
+        <form id="base_price_form">
+            $&nbsp;<input type="number" id="loan_amount" aria-label="loan amount" placeholder="Loan amount" required>
+            financed over
+            <input type="number" id="loan_duration" aria-label="loan duration" placeholder="Term" required>&nbsp;mo.
+            at
+            <input type="number" id="apr" aria-label="apr" placeholder="APR" step="0.01" required>&nbsp;% interest
+            <button id="calculate_plane_cost" class="secondary">Calculate</button>
+            <span id="total_cost_wrapper" style="display: none;"><span id="monthly_payment"></span> per month, $<span id="total_cost"></span> total ($<span id="interest"></span> in interest)</span>
+        </form>
+    </article>
+</main>
+</body>
+</html>
