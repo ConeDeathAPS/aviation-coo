@@ -28,18 +28,27 @@ window.onload = () => {
 
     document.getElementById('use_recurring_form').addEventListener('submit', (e) => {
         e.preventDefault();
-        const monthlyUse = parseFloat(document.getElementById('use_per_month').value);
+        document.getElementById('use_recurring_error').style.display = 'none';
         const fuelCost = parseFloat(document.getElementById('fuel_cost').value);
         const maintenanceCost = parseInt(document.getElementById('maint_cost').value, 10);
         const overhaulCost = parseInt(document.getElementById('overhaul_cost').value, 10);
-        const timeSinceLastOverhaul = parseInt(document.getElementById('time_since_last_overhaul').value, 10);
-        const monthsUntilOverhaul = (2000 - timeSinceLastOverhaul) / monthlyUse;
-        const overhaulInstallment = overhaulCost / monthsUntilOverhaul;
-        const monthlyMaintCost = maintenanceCost * monthlyUse;
-        const effectiveHourlyCost = overhaulInstallment + fuelCost + (monthlyMaintCost / monthlyUse);
-        document.getElementById('time_to_next_overhaul').textContent = monthsUntilOverhaul.toLocaleString(undefined, { style: 'currency', currency: 'USD' });
+        const timeBetweenOverhaul = parseInt(document.getElementById('overhaul_tbo').value, 10);
+        const timeSinceLastOverhaul = parseInt(document.getElementById('overhaul_tso').value, 10);
+        let hoursUntilOverhaul;
+        if (timeSinceLastOverhaul > timeBetweenOverhaul) {
+            document.getElementById('use_recurring_error').classList.remove('warning', 'error'); // Clear classes on the element
+            document.getElementById('use_recurring_error').textContent = 'This plane needs an immediate overhaul!';
+            document.getElementById('use_recurring_error').classList.add('warning');
+            document.getElementById('use_recurring_error').style.display = 'inline-block';
+            hoursUntilOverhaul = timeBetweenOverhaul;
+        } else {
+            hoursUntilOverhaul = timeBetweenOverhaul - timeSinceLastOverhaul;
+        }
+        const overhaulHourly = overhaulCost / hoursUntilOverhaul;
+        const effectiveHourlyCost = overhaulHourly + fuelCost + maintenanceCost;
         document.getElementById('effective_hourly_cost').textContent = effectiveHourlyCost.toLocaleString(undefined, { style: 'currency', currency: 'USD' });
-        document.getElementById('overhaul_installment_cost').textContent = overhaulInstallment.toLocaleString(undefined, { style: 'currency', currency: 'USD' });
+        document.getElementById('time_to_next_overhaul').textContent = hoursUntilOverhaul.toFixed();
+        document.getElementById('overhaul_installment_cost').textContent = overhaulHourly.toLocaleString(undefined, { style: 'currency', currency: 'USD' });
         document.getElementById('overhaul_wrapper').style.display = 'inline-block';
         document.getElementById('effective_hourly_wrapper').style.display = 'inline-block';
     });

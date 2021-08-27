@@ -18,6 +18,7 @@
             <br/>
             <button class="secondary">Calculate</button>
             <br/>
+            <p id="base_price_error" style="display: none;"></p>
             <span id="total_cost_wrapper" style="display: none;">Total: <span id="monthly_payment"></span> per month, <span id="total_cost"></span> total (<span id="interest"></span> in interest)</span>
         </form>
     </article>
@@ -30,21 +31,23 @@
             <br/>
             <button class="secondary">Calculate</button>
             <br/>
+            <p id="non_use_recurring_error" style="display: none;"></p>
             <span id="non_use_recurring_wrapper" style="display: none;">Total: <span id="non_use_recurring_monthly_cost"></span>/mo whether you fly the plane or not.</span>
         </form>
     </article>
     <article>
         <h2>Use-based recurring costs</h2>
         <form id="use_recurring_form">
-            <span>Est. use: <input type="number" id="use_per_month" aria-label="estimated monthly use" placeholder="Estimated use" required min="0" step="0.1">&nbsp;hrs/mo</span>
             <span>Fuel cost: $&nbsp;<input type="number" id="fuel_cost" aria-label="fuel cost/hr" placeholder="Fuel" required min="0" step="0.01">&nbsp;/hr</span>
-            <span>Maintenance: $&nbsp;<input type="number" id="maint_cost" aria-label="maintenance cost" placeholder="Maintenance" required min="0" step="0.01">&nbsp;/mo</span>
-            <span>Overhaul: $&nbsp;<input type="number" id="overhaul_cost" aria-label="overhaul cost" placeholder="Est. Overhaul" required min="0" step="0.01">/mo (2000hr time between overhaul is assumed)</span>
-            <span>TSO: <input type="number" id="time_since_last_overhaul" aria-label="time since last overhaul" placeholder="TSO" required min="0" max="1999" step="0.1"></span>
+            <span>Maintenance: $&nbsp;<input type="number" id="maint_cost" aria-label="maintenance cost" placeholder="Maintenance" required min="0" step="0.01">&nbsp;/hr</span>
+            <span>Overhaul: $&nbsp;<input type="number" id="overhaul_cost" aria-label="overhaul cost" placeholder="Est. Overhaul cost" required min="0" step="0.01"></span>
+            <span>TBO:&nbsp;<input type="number" id="overhaul_tbo" aria-label="time between overhaul" placeholder="TBO" required min="0" step="0.01">&nbsp;hrs</span>
+            <span>TSO:&nbsp;<input type="number" id="overhaul_tso" aria-label="time since last overhaul" placeholder="TSO" required min="0" step="0.1">&nbsp;hrs</span>
             <br/>
             <button class="secondary">Calculate</button>
             <br/>
-            <span id="overhaul_wrapper" style="display: none;">You will need an overhaul in <span id="time_to_next_overhaul"></span> months.</span>
+            <p id="use_recurring_error" style="display: none;"></p>
+            <span id="overhaul_wrapper" style="display: none;">You will need an overhaul in <span id="time_to_next_overhaul"></span> hours.</span>
             <span id="effective_hourly_wrapper" style="display: none;">Total: <span id="effective_hourly_cost"></span>/hr (<span id="overhaul_installment_cost"></span>/hr for overhaul included)</span>
         </form>
     </article>

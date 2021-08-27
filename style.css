@@ -54,8 +54,11 @@ header > h1 {
     margin: 10px 0;
 }
 main {
-    display: grid;
+    display: flex;
     padding: 25px 20px;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: flex-start;
 }
 main > article {
     background-color: #8B97BB;
@@ -75,4 +78,13 @@ h1, h1, h3, h4, h5 {
 }
 a, p, button, input, li, span, article {
     font-family: Helvetica, serif;
+}
+
+p.error {
+    color: red;
+    font-weight: bold;
+}
+p.warning {
+    color: orange;
+    font-weight: bold;
 }
