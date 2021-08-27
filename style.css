@@ -48,12 +48,7 @@ button:active {
 input {
     padding: 5px 8px;
     font-size: 18px;
-}
-input[type=number] {
-    width: 120px;
-}
-input#apr, input#loan_duration {
-    width: 100px;
+    margin: 3px 0px;
 }
 header > h1 {
     margin: 10px 0;
@@ -63,10 +58,16 @@ main {
     padding: 25px 20px;
 }
 main > article {
-    background-color: #FFD3AA;
+    background-color: #8B97BB;
     margin: 3px;
     padding: 10px 15px;
     border-radius: 4px;
+}
+main > article > form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 h1, h1, h3, h4, h5 {

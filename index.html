@@ -10,14 +10,42 @@
 </header>
 <main>
     <article>
+        <h2>Base cost of financing</h2>
         <form id="base_price_form">
-            $&nbsp;<input type="number" id="loan_amount" aria-label="loan amount" placeholder="Loan amount" required>
-            financed over
-            <input type="number" id="loan_duration" aria-label="loan duration" placeholder="Term" required>&nbsp;mo.
-            at
-            <input type="number" id="apr" aria-label="apr" placeholder="APR" step="0.01" required>&nbsp;% interest
-            <button id="calculate_plane_cost" class="secondary">Calculate</button>
-            <span id="total_cost_wrapper" style="display: none;"><span id="monthly_payment"></span> per month, $<span id="total_cost"></span> total ($<span id="interest"></span> in interest)</span>
+            <span>Loan amount: $&nbsp;<input type="number" id="loan_amount" aria-label="loan amount" placeholder="Loan amount" required min="0"></span>
+            <span>Term: <input type="number" id="loan_duration" aria-label="loan duration" placeholder="Term" required min="0">&nbsp;mo.</span>
+            <span>Interest: <input type="number" id="apr" aria-label="apr" placeholder="APR" step="0.01" required min="0">&nbsp;%</span>
+            <br/>
+            <button class="secondary">Calculate</button>
+            <br/>
+            <span id="total_cost_wrapper" style="display: none;">Total: <span id="monthly_payment"></span> per month, <span id="total_cost"></span> total (<span id="interest"></span> in interest)</span>
+        </form>
+    </article>
+    <article>
+        <h2>Non-use-based recurring costs</h2>
+        <form id="non_use_recurring_form">
+            <span>Storage: $&nbsp;<input type="number" id="storage_cost" aria-label="storage cost" placeholder="Storage" required min="0" step="0.01">&nbsp;/mo</span>
+            <span>Annual: $&nbsp;<input type="number" id="annual_insp_cost" aria-label="annual inspection cost" placeholder="Annual" required min="0" step="0.01">&nbsp;/yr</span>
+            <span>Insurance: $&nbsp;<input type="number" id="insurance_cost" aria-label="insurance cost" placeholder="Insurance" required min="0" step="0.01">&nbsp;/mo</span>
+            <br/>
+            <button class="secondary">Calculate</button>
+            <br/>
+            <span id="non_use_recurring_wrapper" style="display: none;">Total: <span id="non_use_recurring_monthly_cost"></span>/mo whether you fly the plane or not.</span>
+        </form>
+    </article>
+    <article>
+        <h2>Use-based recurring costs</h2>
+        <form id="use_recurring_form">
+            <span>Est. use: <input type="number" id="use_per_month" aria-label="estimated monthly use" placeholder="Estimated use" required min="0" step="0.1">&nbsp;hrs/mo</span>
+            <span>Fuel cost: $&nbsp;<input type="number" id="fuel_cost" aria-label="fuel cost/hr" placeholder="Fuel" required min="0" step="0.01">&nbsp;/hr</span>
+            <span>Maintenance: $&nbsp;<input type="number" id="maint_cost" aria-label="maintenance cost" placeholder="Maintenance" required min="0" step="0.01">&nbsp;/mo</span>
+            <span>Overhaul: $&nbsp;<input type="number" id="overhaul_cost" aria-label="overhaul cost" placeholder="Est. Overhaul" required min="0" step="0.01">/mo (2000hr time between overhaul is assumed)</span>
+            <span>TSO: <input type="number" id="time_since_last_overhaul" aria-label="time since last overhaul" placeholder="TSO" required min="0" max="1999" step="0.1"></span>
+            <br/>
+            <button class="secondary">Calculate</button>
+            <br/>
+            <span id="overhaul_wrapper" style="display: none;">You will need an overhaul in <span id="time_to_next_overhaul"></span> months.</span>
+            <span id="effective_hourly_wrapper" style="display: none;">Total: <span id="effective_hourly_cost"></span>/hr (<span id="overhaul_installment_cost"></span>/hr for overhaul included)</span>
         </form>
     </article>
 </main>
